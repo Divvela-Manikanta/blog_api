@@ -1,0 +1,116 @@
+leet code problems:
+1.url: https://leetcode.com/problems/triangle-judgement/
+query:
+select *,if((x+y>z and y+z>x and z+x>y),if((x-y<z and y-z<x and z-x<y),"Yes","No"),"No") as triangle from Triangle 
+explanation:
+if condtion will take the three arguments as input and i.e if("condition to be validate","if yes","if no")
+
+2.url: https://leetcode.com/problems/sales-person/
+query:
+with temp as
+(
+select a.name as req,b.* from SalesPerson as a
+left join(select a.*,b.sales_id from Company as a left join Orders as b
+on a.com_id  = b.com_id ) as b
+on a.sales_id = b.sales_id 
+)
+
+select distinct(req) as name from temp 
+where req not in (select req from temp where temp.name="red") 
+
+explanation:
+created a temp table which holdes data of select query by joining the and getting the distinct names which b.name is not red
+
+3.url: https://leetcode.com/problems/classes-more-than-5-students/
+query:
+select class from Courses 
+group by class
+having count(class)>4
+
+explanation:
+we group the data by using group by and displaying the data which has count greater than 4
+
+
+url: https://leetcode.com/problems/employee-bonus/
+
+query:
+SELECT a.name, b.bonus 
+FROM Employee AS a
+LEFT JOIN Bonus AS b ON a.empId = b.empId 
+WHERE b.bonus IS NULL or b.bonus < 1000
+
+explanation:
+we joning the two tables and showing the data that has bonus greater than 1000
+
+4.url: https://leetcode.com/problems/customers-who-never-order/
+
+query:
+select name as Customers from Customers 
+where id not in(select customerId  from Orders )
+
+explanation:
+we are getting the data of tne in 1st query when not in subquery
+
+5.url: https://leetcode.com/problems/employees-earning-more-than-their-managers/
+
+query:
+select a.name as Employee  from Employee as a
+left join Employee as b
+on a.managerId =b.id
+where(a.salary>b.salary)
+
+explanation:
+we have left join same table the table and comparing the salaryof the manager and employee 
+
+6.url : https://leetcode.com/problems/duplicate-emails/
+query:
+select email from person 
+group by email 
+having (count(email)>1)
+
+explanation:
+we have grouping the data by email and getting the count and showing the data which has greater than one (duplicates)
+
+7.url: https://leetcode.com/problems/combine-two-tables/ 
+
+query:
+select per.firstName,per.lastName,addr.city,addr.state from person as per
+left join address as addr
+on per.personId = addr.personId
+
+explanation:
+we are selecting the few coloumns and joining the tables and getting the data
+
+8.url : https://leetcode.com/problems/second-highest-salary/
+
+query:
+select max(Salary) as SecondHighestSalary  from employee
+where salary not in (Select max(Salary)  from employee)
+
+explanation:
+to ge  the second highest salary we are using the subquery which conating the highest salary 
+
+
+normal quries:
+set @value = "mani,hii,hello"; ##using regexp expression changed the content 
+sELECT @value AS 'Original String',  
+REGEXP_REPLACE(@value, 'hii', 'none') AS 'Resultant String'
+
+create temporary table temp3 # for creatng temp tables
+select distinct(salary) as sal from Employee
+order by salary 
+
+ SELECT * FROM sys.emp_personal_info;
+ select * from emp_info 
+ where emp_id =1 and emp_name is not null
+ insert into sys.emp_personal_info
+ values (5,44,"india","ece"
+ select * from emp_info as a
+ left join emp_personal_info as b
+ on a.emp_id = b.emp_id
+
+ SET SQL_SAFE_UPDATES = 0; # updating the values  
+update emp_info
+set emp_id = 5
+where emp_name = "hii"
+
