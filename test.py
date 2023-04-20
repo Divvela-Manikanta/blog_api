@@ -1,10 +1,10 @@
-from pymongo import MongoClient 
+# from pymongo import MongoClient
+# from flask import jsonify 
 
 
-conn = MongoClient("localhost",27017)
-db = conn.blog
-collection = db.blogcoll
-
+# conn = MongoClient("localhost",27017)
+# db = conn.blog
+# collection = db.blogcoll
 
 # def insert_data(data):
 #     # try:
@@ -41,30 +41,21 @@ collection = db.blogcoll
 
 # output = collection.aggregate([
 #         {"$match":{"isPosted":"yes"}},
-#         {"$sort":{"createdAt":-1}},
+#         {"$sort":{"createdAt":-1,"id":1}},
 #         {"$skip":0},
 #         {"$limit":9},
 #         {"$project":{"name":1,"description":1,"createdBy":1,"postedAt":1}} ]) 
 # for val in output:
 #     print(val)
 
-def delete_data(data):
-    out = collection.find_one(data)
-    if out!=0:
-        try:
-            collection.delete_one(data)
-            print ({"Meassage":"Data is deleted.",
-                      "Success": True,
-                      "Status":200})
-        except:
-            print ({"Meassage":"Something went wrong",
-                      "Success": False,
-                      "Status":500})
-    else:
-         return ({"Meassage":"Enter the valid id and username to delete",
-                      "Success": True,
-                      "Status":200})
+# def delete_data(data):
+#     out = collection.find_one(data)
+#     jsonify(out)
+   
+# data= {"id":"blog2",
+#     "createdBy":"user123"}
+# delete_data(data)
 
-data= {"id":"blog1",
-    "createdBy":"user13"}
-delete_data(data)
+
+
+assert 1<0

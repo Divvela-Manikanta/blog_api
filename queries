@@ -55,12 +55,18 @@ we are getting the data of tne in 1st query when not in subquery
 
 query:
 select a.name as Employee  from Employee as a
-left join Employee as b
+inner join Employee as b
 on a.managerId =b.id
-where(a.salary>b.salary)
+where(a.salary>b.salary))
+
+or
+
+select a.name as Employee  from Employee as a,Employee as b
+where  a.managerId =b.id
+and (a.salary>b.salary)
 
 explanation:
-we have left join same table the table and comparing the salaryof the manager and employee 
+we can perform self join,left join,inner join same table the table and comparing the salary of the manager and employee 
 
 6.url : https://leetcode.com/problems/duplicate-emails/
 query:
@@ -104,7 +110,7 @@ order by salary
  select * from emp_info 
  where emp_id =1 and emp_name is not null
  insert into sys.emp_personal_info
- values (5,44,"india","ece"
+ values (5,44,"india","ece")
  select * from emp_info as a
  left join emp_personal_info as b
  on a.emp_id = b.emp_id

@@ -12,13 +12,12 @@ app = Flask(__name__)
 def create_blog():
     data = request.get_json()
     obj = blog_valid.from_dict(data) 
-    dict_for_pass = {"id":obj.id,"name":obj.name,"description":obj.description,"createdBy":obj.createdBy,"topic":obj.topic,"blogBody":obj.blogBody,"isPosted":obj.isPosted}
-    data_for_validation = blog_method(dict_for_pass)
+    data_for_validation = blog_method(obj)
     insert = datetime.now()
-    dict_for_pass["createdAt"] = insert.strftime("%d/%m/%Y %H:%M:%S")
-    dict_for_pass["postedAt"] = insert.strftime("%d/%m/%Y %H:%M:%S")
-    dict_for_pass["blogSize"] = len(dict_for_pass['blogBody'].split(" "))
-    return jsonify(insert_data(dict_for_pass))
+    data_for_validation["createdAt"] = insert.strftime("%d/%m/%Y %H:%M:%S")
+    data_for_validation["postedAt"] = insert.strftime("%d/%m/%Y %H:%M:%S")
+    data_for_validation["blogSize"] = len(data_for_validation['blogBody'].split(" "))
+    return jsonify(insert_data(data_for_validation))
 
 
 @app.route("/dashboard",methods=["POST"])
